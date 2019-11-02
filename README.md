@@ -1,2 +1,2 @@
-# AspDotnetCore_testapp
-AspDotnetCore_Repo
+# AspDotnetCore Test App
+AspDotnetCore Repo
