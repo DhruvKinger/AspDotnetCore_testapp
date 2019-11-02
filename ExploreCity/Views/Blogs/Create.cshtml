@@ -1,0 +1,24 @@
+﻿@addTagHelper "*,Microsoft.AspNetCore.Mvc.TagHelpers"
+@model ExploreCity.Models.Post
+@{ Layout = "_Layout";
+}
+<h1> Create ur Blog Post</h1>
+<fieldset>
+    <form asp-action="Create" asp-controller="Blogs">
+        @Html.ValidationSummary()
+    <p>
+        @Html.LabelFor(x => x.Title)
+        @Html.EditorFor(x => x.Title)
+        @Html.ValidationMessageFor(x => x.Title)
+    </p>
+    <p>
+        @Html.LabelFor(x => x.Body)
+        @Html.TextAreaFor(x => x.Body)
+        @Html.ValidationMessageFor(x => x.Body)
+    </p>
+    <p>
+        <button type="submit">Create Post</button>
+    </p>
+</form>
+
+</fieldset>

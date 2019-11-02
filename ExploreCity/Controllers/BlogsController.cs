@@ -2,23 +2,46 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExploreCity.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExploreCity.Controllers
 {
+    [Route("blog")]
     public class BlogsController : Controller
     {
+        [Route("")]
         public IActionResult Index()
         {
-            return new ContentResult { Content = "Blog posts" };
+            return View();
         }
-        [Route("blogs/{year:min(2000)}/{month:range(1,12)}/{key}")]
+        [Route("{year:min(2000)}/{month:range(1,12)}/{key}")]
         public IActionResult post(int year,int month,string key)
         {
-            return new ContentResult {Content=string.Format(
-                "Year :{0};Month :{1};key :{2}",year,month,key
-                )
+            var post = new Post
+            {
+                Title = "New post",
+                Posted = DateTime.Now,
+                Author = "Dhruv Kinger",
+                Body = "u will like it "
             };
+            return View(post);
+           
+        }
+        [HttpGet,Route("create")]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost,Route("create")]
+        public IActionResult Create(Post post)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            post.Author = User.Identity.Name;
+            post.Posted = DateTime.Now;
+            return View();
         }
     }
 }
